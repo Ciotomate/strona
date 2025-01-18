@@ -10,7 +10,6 @@ type Song = {
     url: string;
 };
 
-// Typ dla nowego utworu (bez `id`, bo jeszcze go nie ma)
 type NewSong = Omit<Song, 'id'>;
 
 function App() {
@@ -19,7 +18,7 @@ function App() {
 
     useEffect(() => {
         axios
-            .get<Song[]>(API_URL) // Dodano typowanie danych z API
+            .get<Song[]>(API_URL)
             .then((response) => setSongs(response.data))
             .catch((error) => console.error('Error fetching songs:', error));
     }, []);
@@ -33,7 +32,7 @@ function App() {
         }
 
         axios
-            .post<Song>(API_URL, newSong) // Dodano typowanie danych odpowiedzi
+            .post<Song>(API_URL, newSong)
             .then((response) => {
                 setSongs([...songs, response.data]);
                 setNewSong({ title: '', url: '' });
